@@ -1,0 +1,32 @@
+<h1 class="mt-4">Send Message</h1>
+<p>Send Message Page</p>
+
+<form id="message-form" action="/user/send-message" method="post" enctype="multipart/form-data">
+  <div class="my-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" name="title" id="title"/>
+  </div>
+  <div class="my-3">
+    <label for="description" class="form-label">Description</label>
+    <input
+      type="text"
+      class="form-control"
+      name="description"
+      id="description"
+    />
+  </div>
+  <div class="my-3">
+    <label for="to" class="form-label">To</label>
+    <input
+      type="text"
+      class="form-control"
+      name="to"
+      id="to"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="uploaded_file" class="form-label">File</label>
+    <input type="file" class="form-control" name="uploaded_file" id="uploaded_file" />
+  </div>
+  <button type="submit" class="btn btn-primary">Send</button>
+</form>
