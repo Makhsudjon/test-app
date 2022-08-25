@@ -1,19 +1,22 @@
 <h1 class="mt-4">Send Message</h1>
 <p>Send Message Page</p>
 
-<form id="message-form" action="/user/send-message" method="post" enctype="multipart/form-data">
+<form name="message" action="/user/send-message" method="post" enctype="multipart/form-data">
   <div class="my-3">
-    <label for="title" class="form-label">Title</label>
+    <label for="title" class="form-label" autofocus>Title</label>
     <input type="text" class="form-control" name="title" id="title"/>
   </div>
   <div class="my-3">
     <label for="description" class="form-label">Description</label>
-    <input
+    <textarea
       type="text"
+      cols="50"
+      rows="2"
       class="form-control"
       name="description"
       id="description"
-    />
+    >
+    </textarea>
   </div>
   <div class="my-3">
     <label for="to" class="form-label">To</label>
@@ -22,11 +25,12 @@
       class="form-control"
       name="to"
       id="to"
+      aria-required="true"
     />
   </div>
   <div class="mb-3">
     <label for="uploaded_file" class="form-label">File</label>
     <input type="file" class="form-control" name="uploaded_file" id="uploaded_file" />
   </div>
-  <button type="submit" class="btn btn-primary">Send</button>
+  <button type="button" class="btn btn-primary"  name="button" onclick="sendMessageForm">Send</button>
 </form>

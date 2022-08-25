@@ -1,12 +1,12 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import CustomJWT from '../../cryptography/customJWT.js';
+// import CustomJWT from '../../cryptography/customJWT.js';
 
 import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from 'bcryptjs';
-// import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 
 
@@ -70,15 +70,15 @@ userSchema.methods.toJSON = function(){
     return user;
 }
 
-// userSchema.methods.genereteToken = function(){
-//     const token = jwt.sign({_id:this._id, name:this.name, email:this.email}, process.env.JWT_SECRET, { expiresIn: '1h' });
-//     return token;
-// }
-
 userSchema.methods.genereteToken = function(){
-    const token = CustomJWT.sign({ name:this.name, email:this.email }, 100000);
+    const token = jwt.sign({_id:this._id, name:this.name, email:this.email}, process.env.JWT_SECRET, { expiresIn: '1h' });
     return token;
 }
+
+// userSchema.methods.genereteToken = function(){
+//     const token = CustomJWT.sign({ name:this.name, email:this.email }, 100000);
+//     return token;
+// }
 
 userSchema.methods.saveToken = async function(token){
     this.tokens = this.tokens.concat({token}); 
@@ -96,15 +96,15 @@ userSchema.methods.removeAllTokens = async function(){
     await this.save();
 }
 
-// userSchema.methods.verifyToken = function (){
-//     const result = jwt.verify(this.token, process.env.JWT_SECRET);
-//     return result;
-// }
-
 userSchema.methods.verifyToken = function (){
-    const result = CustomJWT.verify(this.token);
+    const result = jwt.verify(this.token, process.env.JWT_SECRET);
     return result;
 }
+
+// userSchema.methods.verifyToken = function (){
+//     const result = CustomJWT.verify(this.token);
+//     return result;
+// }
 
 
 userSchema.statics.findByCredentials = async function (name, password){

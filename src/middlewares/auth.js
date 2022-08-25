@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import User from '../db/models/user.js';
-import CustomJWT from '../cryptography/customJWT.js';
+// import CustomJWT from '../cryptography/customJWT.js';
 
 import jwt from 'jsonwebtoken';
 
@@ -10,6 +10,7 @@ import jwt from 'jsonwebtoken';
 
 const auth = async(req, res, next)=>{
     try {
+        console.log('Request ', req.headers);
         const token = req.header('Authorization').replace('Bearer ', '');
         const decoded = jwt.verify(token, process.env.JWT_SECRET||'thisismyjwtsecret');
         //const decoded = CustomJWT.verify(token);

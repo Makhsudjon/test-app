@@ -1,10 +1,10 @@
 <h1 class="mt-4">Register</h1>
 <p>Please register using the form below</p>
 
-<form action="/user/register" method="post">
+<form name="register" action="/user/register" method="post">
   <div class="my-3">
-    <label for="name" class="form-label">Name</label>
-    <input type="text" class="form-control" name="name" id="name"/>
+    <label for="name" class="form-label" autofocus>Name</label>
+    <input type="text" class="form-control" name="name" id="name" aria-required="true" />
   </div>
   <div class="my-3">
     <label for="email" class="form-label">Email address</label>
@@ -13,21 +13,24 @@
       class="form-control"
       name="email"
       id="email"
+      aria-required="true"
     />
   </div>
   <div class="my-3">
     <label for="username" class="form-label">Age</label>
     <input
       type="text"
+      min="18"
       class="form-control"
       name="age"
       id="age"
+      aria-required="true"
     />
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" name="password" id="password" />
+    <input type="password" minlength="6" class="form-control" name="password" id="password" aria-required="true" />
   </div>
   
-  <button type="submit" class="btn btn-primary">Register</button>
+  <button type="buttun" class="btn btn-primary" name="button" onclick="sendRegisterForm">Register</button>
 </form>

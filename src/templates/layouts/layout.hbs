@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/index.css">
     <title>Home</title>
 </head>
 <body>
@@ -12,27 +11,10 @@
     <div class="container">
         {{{body}}}
     </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-  const socket = io();
-
-  const form = document.getElementById('message-form');
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const data = {
-            user: '6302a5be7568d180d56c4ecb',
-            message: {
-                to: '6302a3aefd8d9df8aba6d372',
-                info:'Welcome to Uzbekistan !'
-            }
-        }
-    socket.emit('user-send-message', data);
-    socket.on('user-sent-message', message=>{
-        console.log(message);
-    });
-  });
-</script>
+    <script type="module" src="/js/user.js"></script>
 </body>
 </html>
 

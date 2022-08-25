@@ -3,13 +3,12 @@ import Message from '../db/models/message.js';
 import auth from '../middlewares/auth.js';
 import CustomError from '../utils/custom.error.js';
 import upload from '../middlewares/upload.js';
-
+import utils from '../utils/utils.js';
 import express from 'express';
 import bcrypt from 'bcryptjs';
 
-
 const router = express.Router();
-let authToken;
+
 router.get('/login', (req, res) => {
     res.render('user/login');
 });
@@ -21,7 +20,6 @@ router.post('/login', async (req, res) => {
         const token = user.genereteToken();
         user.tokens = user.tokens.concat({token}); 
         await user.save();
-        authToken = token;
         return res.send(CustomError.Success(user, token));
     } catch (e) {
         console.log(e);
@@ -66,8 +64,7 @@ router.post('/register', async (req, res) => {
         const user = new User(req.body); 
         user.password = await bcrypt.hash(user.password, 8);
         await user.save();
-        res.redirect('/user/login')
-        // return res.status(201).send(CustomError.Success(user));
+        return res.status(201).send(CustomError.Success());
     } catch (e) {
         console.log(e);
         res.status(500).send(CustomError.UnknownError(e));
@@ -119,12 +116,8 @@ router.delete('/me', auth, async (req, res)=>{
         res.status(500).send(CustomError.UnknownError(e.message));
     }
 });
-router.use((req, res, next) => {
-    req.headers['authorization'] = 'Bearer '+authToken;
-    next();
-});
-router.get('/send-message', auth, (req, res) => {
-    
+
+router.get('/send-message', (req, res) => {    
     res.render('user/message');
 });
 

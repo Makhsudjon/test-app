@@ -1,7 +1,7 @@
 <h1 class="mt-4">Login</h1>
 <p>Please login</p>
 
-<form method="post" action="/user/login">
+<form name="login" method="post" action="/user/login">
   
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
@@ -10,11 +10,13 @@
       class="form-control"
       name="name"
       id="name"
+      aria-required="true"
+      autofocus
     />
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" name="password" id="password" />
+    <input type="password" class="form-control" name="password" id="password" aria-required="true" />
   </div>
-  <button type="submit" class="btn btn-primary">Login</button>
+  <button type="button" class="btn btn-primary"  name="button">Login</button>
 </form>
